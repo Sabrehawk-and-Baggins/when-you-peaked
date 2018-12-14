@@ -48,17 +48,12 @@ class BookResults extends Component {
 
     componentDidMount() {
         this.getData(this.props.authorSubmit);
-        // scrollToElement('.card', {
-        //     offset: -200,
-        //     ease: 'outCube',
-        //     duration: 2000
-        // });
     }
 
     //  first Axios call, setting
     getData = (author) => {
         axios({
-            url: 'http://proxy.hackeryou.com',
+            url: 'https://proxy.hackeryou.com',
             dataResponse: 'json',
             paramsSerializer: function (params) {
                 return Qs.stringify(params, { arrayFormat: 'brackets' })
@@ -78,9 +73,9 @@ class BookResults extends Component {
         }).then(res => {      
 
             scrollToElement('.card', {
-                offset: -200,
+                offset: 0,
                 ease: 'outCube',
-                duration: 2000
+                duration: 1500
             });
             
             // array of 20 works by searched author
@@ -231,9 +226,7 @@ class BookResults extends Component {
     }
 
     // a dynamic function for ALL handle clicks using e.target.id to update state
-    onClick = (e) => {
-        console.log(this.state[e.target.id]);
-        
+    onClick = (e) => {        
         this.setState({
             [e.target.id]: !(this.state[e.target.id])
         })  
@@ -265,6 +258,7 @@ class BookResults extends Component {
 
                                 <div className="talkScoreContainer clearfix">
                                     <div className="talkScore" onClick={this.onClick} id="activeThree" value={this.state.activeThree}>
+                                        <p>Talk Score:</p>
                                         <p>{`${this.state.highBook.talkScore}`}</p>
                                         <i className="fas fa-question"></i>
                                     </div>
@@ -300,6 +294,7 @@ class BookResults extends Component {
                                 </div>
                                 <div className="talkScoreContainer clearfix">
                                     <div className={"talkScore"} onClick={this.onClick} id="activeFour">
+                                        <p>Talk Score:</p>
                                         <p>{`${this.state.lowBook.talkScore}`}</p>
                                         <i className="fas fa-question"></i>
                                     </div>
